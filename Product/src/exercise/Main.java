@@ -3,9 +3,9 @@ import java.util.*;
 
 public class Main {
 	public static void main(String[] args) {
-		LinkedHashSet<Product> list = new LinkedHashSet<Product>();
+		TreeSet<Product> list = new TreeSet<Product>();
 		Scanner sc = new Scanner(System.in);
-		Product obj;
+		Product obj = null;
 		String name = "";
 		double price = 0;
 		int expireDays = 0;
@@ -17,28 +17,7 @@ public class Main {
 			sc.nextLine();
 			switch(option) {
 			case 1: //INSERT
-				char option1 = 'z';
-				System.out.print("Introduce the product name: ");
-				name = sc.nextLine();
-				System.out.print("Introduce the product price: ");
-				price = sc.nextDouble();
-				sc.nextLine();
-				System.out.println("Is the following product expirable?");
-				while(!(option1 == 'Y' || option1 == 'y' || option1 == 'N' || option1 == 'n')){
-					option1 = sc.nextLine().charAt(0);
-					if(option1 == 'Y' || option1 == 'y') {
-						System.out.print("Introduce expiration days: ");
-						expireDays = sc.nextInt();
-						sc.nextLine();
-						obj = new Expirable(name, price, expireDays);
-						list.add(obj);
-					} else if(option1 == 'N' || option1 == 'n') {
-						System.out.print("Introduce the type of product: ");
-						type = sc.nextLine();
-						obj = new NotExpirable(name, price, type);
-						list.add(obj);
-					}
-				}
+				insert(type, price, option, type, obj, sc, list);
 				break;
 			case 2: //READ
 				for(Product instance: list) {
@@ -47,14 +26,7 @@ public class Main {
 				}
 				break;
 			case 3: //DELETE
-				System.out.print("Introduce the name of the following product to delete: ");
-				name = sc.nextLine();
-				obj = new Product(name);
-				if(list.contains(obj)) {
-					list.remove(obj);
-				} else {
-					System.out.println("The product name does not exist.");
-				}
+				delete(type, obj, sc, list);
 				break;
 			case 0: //EXIT
 				System.out.println("Exiting program...");
@@ -76,6 +48,46 @@ public class Main {
 		System.out.println("0) Exit");
 		System.out.println();
 		System.out.print("Option: ");
+	}
+	
+	public static void insert(String name, double price, int expireDays, String type, Product obj, Scanner sc, TreeSet<Product> list) {
+		char option1 = 'z';
+		System.out.print("Introduce the product name: ");
+		name = sc.nextLine();
+		System.out.print("Introduce the product price: ");
+		price = sc.nextDouble();
+		sc.nextLine();
+		do {
+			System.out.println("Is the following product expirable?");
+			option1 = sc.nextLine().charAt(0);
+		}
+		while(!(option1 == 'Y' || option1 == 'y' || option1 == 'N' || option1 == 'n'));
+		if(option1 == 'Y' || option1 == 'y') {
+			System.out.print("Introduce expiration days: ");
+			expireDays = sc.nextInt();
+			sc.nextLine();
+			obj = new Expirable(name, price, expireDays);
+		} else {
+			System.out.print("Introduce the type of product: ");
+			type = sc.nextLine();
+			obj = new NotExpirable(name, price, type);
+		}
+		if(list.add(obj)) {
+			System.out.println("The following product has been successfully added.");
+		} else {
+			System.out.println("The following product already exists!");
+		}
+	}
+	
+	public static void delete(String name, Product obj, Scanner sc, TreeSet<Product> list) {
+		System.out.print("Introduce the name of the following product to delete: ");
+		name = sc.nextLine();
+		obj = new Product(name);
+		if(list.remove(obj)) {
+			System.out.println("The following product has been successfully deleted.");
+		} else {
+			System.out.println("The product name does not exist.");
+		}
 	}
 	
 }
