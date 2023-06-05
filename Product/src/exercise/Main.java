@@ -50,7 +50,11 @@ public class Main {
 				System.out.print("Introduce the name of the following product to delete: ");
 				name = sc.nextLine();
 				obj = new Product(name);
-				list.remove(obj);
+				if(list.contains(obj)) {
+					list.remove(obj);
+				} else {
+					System.out.println("The product name does not exist.");
+				}
 				break;
 			case 0: //EXIT
 				System.out.println("Exiting program...");
