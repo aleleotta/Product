@@ -4,6 +4,12 @@ public class Product implements Comparable<Product> {
 	protected String name = "";
 	protected double price = 0;
 	
+	public Product(String name) {
+		if(name != null && !name.equals("")) {
+			this.name = name;
+		}
+	}
+	
 	public Product(String name, double price) {
 		if(name != null && !name.equals("")) {
 			this.name = name;
@@ -58,17 +64,6 @@ public class Product implements Comparable<Product> {
 			check = true;
 		}
 		return check;
-	}
-	
-	public static void menu() {
-		System.out.println("MENU");
-		System.out.println("====================================================");
-		System.out.println("1) Add product");
-		System.out.println("2) Print list of products");
-		System.out.println("3) Delete product");
-		System.out.println("0) Exit");
-		System.out.println();
-		System.out.print("Option: ");
 	}
 	
 }

@@ -12,7 +12,7 @@ public class Main {
 		String type = "";
 		int option = 10;
 		while(option != 0) {
-			Product.menu();
+			menu();
 			option = sc.nextInt();
 			sc.nextLine();
 			switch(option) {
@@ -47,7 +47,10 @@ public class Main {
 				}
 				break;
 			case 3: //DELETE
-				list.remove();
+				System.out.print("Introduce the name of the following product to delete: ");
+				name = sc.nextLine();
+				obj = new Product(name);
+				list.remove(obj);
 				break;
 			case 0: //EXIT
 				System.out.println("Exiting program...");
@@ -59,4 +62,16 @@ public class Main {
 		}
 		sc.close();
 	}
+	
+	public static void menu() {
+		System.out.println("MENU");
+		System.out.println("====================================================");
+		System.out.println("1) Add product");
+		System.out.println("2) Print list of products");
+		System.out.println("3) Delete product");
+		System.out.println("0) Exit");
+		System.out.println();
+		System.out.print("Option: ");
+	}
+	
 }
