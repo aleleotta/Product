@@ -35,6 +35,8 @@ public class Main {
 			case 4: //DELETE
 				delete(type, obj, sc, list); //Call to extracted delete method.
 				break;
+			case 5:
+				break;
 			case 0: //EXIT
 				System.out.println("Exiting program...");
 				break;
@@ -99,6 +101,16 @@ public class Main {
 		}
 	}
 	
+	/**
+	 * The functionality responsible for modifying products within the list (TreeSet) checking if the following product exists first.
+	 * @param name Name of the following product that the administrator wants to modify within the list.
+	 * @param price New price for the product.
+	 * @param expireDays Days left for the product to expire.
+	 * @param type Type of new product in case it has no expiration date.
+	 * @param obj Product to modify.
+	 * @param sc Scanner that is responsible for taking keyboard values.
+	 * @param list List that contains all products.
+	 */
 	public static void modify(String name, double price, int expireDays, String type, Product obj, Scanner sc, TreeSet<Product> list) {
 		System.out.print("Introduce the name of the following product to modify: ");
 		name = sc.nextLine(); //Selection of product to modify.
