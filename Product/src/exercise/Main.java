@@ -51,7 +51,8 @@ public class Main {
 		System.out.println("====================================================");
 		System.out.println("1) Add product");
 		System.out.println("2) Print list of products");
-		System.out.println("3) Delete product");
+		System.out.println("3) Modify product");
+		System.out.println("4) Delete product");
 		System.out.println("0) Exit");
 		System.out.println();
 		System.out.print("Option: ");
