@@ -6,14 +6,9 @@ import java.util.*;
  * @author Alessandro Leotta
  */
 public class Main {
+	static TreeSet<Product> list = new TreeSet<Product>(); //Creation of list (TreeSet).
+	static Scanner sc = new Scanner(System.in); //Input scanner declared.
 	public static void main(String[] args) {
-		TreeSet<Product> list = new TreeSet<Product>(); //Creation of list (TreeSet).
-		Scanner sc = new Scanner(System.in); //Input scanner declared.
-		Product obj = null; //Object that will be used for managing products inside list (TreeSet).
-		String name = ""; //Declaration of variables necessary for product management.
-		double price = 0;
-		int expireDays = 0;
-		String type = "";
 		int option = 10; //Functionality decision input.
 		while(option != 0) { //Creation of while loop containing CRUD.
 			menu(); //Menu printing at beginning of while loop.
@@ -21,7 +16,7 @@ public class Main {
 			sc.nextLine();
 			switch(option) { //Program decides which functionality to use based on option input.
 			case 1: //INSERT
-				insert(type, price, option, type, obj, sc, list); //Call to extracted insert method.
+				insert(sc, list); //Call to extracted insert method.
 				break;
 			case 2: //READ
 				for(Product instance: list) { //Foreach loop responsible for reading each product within list.
@@ -30,10 +25,10 @@ public class Main {
 				}
 				break;
 			case 3: //MODIFY
-				modify(name, price, expireDays, type, obj, sc, list);
+				modify(sc, list);
 				break;
 			case 4: //DELETE
-				delete(type, obj, sc, list); //Call to extracted delete method.
+				delete(sc, list); //Call to extracted delete method.
 				break;
 			case 5:
 				break;
@@ -72,12 +67,13 @@ public class Main {
 	 * @param sc Scanner that is responsible for taking keyboard values and assign them to new attributes.
 	 * @param list List that contains all products.
 	 */
-	public static void insert(String name, double price, int expireDays, String type, Product obj, Scanner sc, TreeSet<Product> list) {
+	public static void insert(Scanner sc, TreeSet<Product> list) {
 		char option1 = 'z';
+		Product obj = null;
 		System.out.print("Introduce the product name: "); //New values input
-		name = sc.nextLine();
+		String name = sc.nextLine();
 		System.out.print("Introduce the product price: ");
-		price = sc.nextDouble();
+		Double price = sc.nextDouble();
 		sc.nextLine();
 		do { //Administrator needs to tell the program with a char value whether the new product is expirable or not.
 			System.out.println("Is the following product expirable?");
@@ -86,12 +82,12 @@ public class Main {
 		while(!(option1 == 'Y' || option1 == 'y' || option1 == 'N' || option1 == 'n'));
 		if(option1 == 'Y' || option1 == 'y') { //If the product is expirable.
 			System.out.print("Introduce expiration days: ");
-			expireDays = sc.nextInt();
+			int expireDays = sc.nextInt();
 			sc.nextLine();
 			obj = new Expirable(name, price, expireDays);
 		} else { //If the product is not expirable.
 			System.out.print("Introduce the type of product: ");
-			type = sc.nextLine();
+			String type = sc.nextLine();
 			obj = new NotExpirable(name, price, type);
 		}
 		if(list.add(obj)) { //Checks if the product already exists and if not it adds the product to the list.
@@ -111,24 +107,25 @@ public class Main {
 	 * @param sc Scanner that is responsible for taking keyboard values.
 	 * @param list List that contains all products.
 	 */
-	public static void modify(String name, double price, int expireDays, String type, Product obj, Scanner sc, TreeSet<Product> list) {
+	public static void modify(Scanner sc, TreeSet<Product> list) {
 		System.out.print("Introduce the name of the following product to modify: ");
-		name = sc.nextLine(); //Selection of product to modify.
-		obj = new Product(name);
+		String name = sc.nextLine(); //Selection of product to modify.
+		Product obj = new Product(name);
 		if(list.contains(obj)) {
 			for(Product instance: list) {
 				if(instance.equals(obj)) {
 					System.out.print("New price: ");
-					price = sc.nextDouble();
+					double price = sc.nextDouble();
 					sc.nextLine();
+					obj.setPrice(price);
 					if(instance instanceof Expirable) {
 						System.out.print("Days to expire: ");
-						expireDays = sc.nextInt();
+						int expireDays = sc.nextInt();
 						sc.nextLine();
 						((Expirable) instance).setExpireDays(expireDays);
 					} else if(instance instanceof NotExpirable) {
 						System.out.print("New type: ");
-						type = sc.nextLine();
+						String type = sc.nextLine();
 						((NotExpirable) instance).setType(type);
 					}
 				}
@@ -143,10 +140,10 @@ public class Main {
 	 * @param sc Scanner that is responsible for taking keyboard value for name.
 	 * @param list List that contains all products.
 	 */
-	public static void delete(String name, Product obj, Scanner sc, TreeSet<Product> list) {
+	public static void delete(Scanner sc, TreeSet<Product> list) {
 		System.out.print("Introduce the name of the following product to delete: ");
-		name = sc.nextLine(); //Selection of product to delete.
-		obj = new Product(name);
+		String name = sc.nextLine(); //Selection of product to delete.
+		Product obj = new Product(name);
 		if(list.remove(obj)) { //Checks if the product doesn't exist and if it does, it deletes the product from the list.
 			System.out.println("The following product has been successfully deleted.");
 		} else {
