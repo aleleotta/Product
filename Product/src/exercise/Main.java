@@ -29,7 +29,10 @@ public class Main {
 					System.out.println();
 				}
 				break;
-			case 3: //DELETE
+			case 3: //MODIFY
+				modify(name, price, expireDays, type, obj, sc, list);
+				break;
+			case 4: //DELETE
 				delete(type, obj, sc, list); //Call to extracted delete method.
 				break;
 			case 0: //EXIT
@@ -93,6 +96,31 @@ public class Main {
 			System.out.println("The following product has been successfully added.");
 		} else {
 			System.out.println("The following product already exists!");
+		}
+	}
+	
+	public static void modify(String name, double price, int expireDays, String type, Product obj, Scanner sc, TreeSet<Product> list) {
+		System.out.print("Introduce the name of the following product to modify: ");
+		name = sc.nextLine(); //Selection of product to modify.
+		obj = new Product(name);
+		if(list.contains(obj)) {
+			for(Product instance: list) {
+				if(instance.equals(obj)) {
+					System.out.print("New price: ");
+					price = sc.nextDouble();
+					sc.nextLine();
+					if(instance instanceof Expirable) {
+						System.out.print("Days to expire: ");
+						expireDays = sc.nextInt();
+						sc.nextLine();
+						((Expirable) instance).setExpireDays(expireDays);
+					} else if(instance instanceof NotExpirable) {
+						System.out.print("New type: ");
+						type = sc.nextLine();
+						((NotExpirable) instance).setType(type);
+					}
+				}
+			}
 		}
 	}
 	

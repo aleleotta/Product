@@ -23,6 +23,16 @@ public class NotExpirable extends Product {
 		}
 	}
 	
+	public String getType() {
+		return type;
+	}
+
+	public void setType(String type) {
+		if(!type.equals("")) {
+			this.type = type;
+		}
+	}
+
 	/**
 	 * Prints secondary attributes for a not expirable product.
 	 */

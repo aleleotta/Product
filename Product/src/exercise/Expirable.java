@@ -21,6 +21,16 @@ public class Expirable extends Product {
 			this.expireDays = expireDays;
 		}
 	}
+	
+	public int getExpireDays() {
+		return expireDays;
+	}
+	public void setExpireDays(int expireDays) {
+		if(expireDays > 0) {
+			this.expireDays = expireDays;
+		}
+	}
+	
 	/**
 	 * Prints secondary attributes for an expirable product.
 	 */
