@@ -1,5 +1,6 @@
 package exercise;
 import java.util.*;
+import java.io.*;
 
 /**
  * Main class responsible for the execution of the program.
@@ -31,6 +32,7 @@ public class Main {
 				delete(sc, list); //Call to extracted delete method.
 				break;
 			case 5:
+				save();
 				break;
 			case 0: //EXIT
 				System.out.println("Exiting program...");
@@ -149,6 +151,21 @@ public class Main {
 			System.out.println("The following product has been successfully deleted.");
 		} else {
 			System.out.println("The product name does not exist.");
+		}
+	}
+	
+	public static void save() {
+		Scanner reader = null;
+		BufferedWriter writer = null;
+		try {
+			reader = new Scanner(new FileReader("src\\exercise\\Products.txt"));
+			writer = new BufferedWriter(new FileWriter("src\\exercise\\Products.txt"));
+		} catch (IOException err) {
+			System.out.println("Failed to generate reader and writer!");
+			err.getMessage();
+		} finally {
+			reader.close();
+			writer.close();
 		}
 	}
 	
