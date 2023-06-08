@@ -165,7 +165,12 @@ public class Main {
 			err.getMessage();
 		} finally {
 			reader.close();
-			writer.close();
+			try {
+				writer.close();
+			} catch (IOException err) {
+				System.out.println("Error while closing writer.");
+				err.getMessage();
+			}
 		}
 	}
 	
