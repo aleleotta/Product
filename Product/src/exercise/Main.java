@@ -55,6 +55,7 @@ public class Main {
 		System.out.println("2) Print list of products");
 		System.out.println("3) Modify product");
 		System.out.println("4) Delete product");
+		System.out.println("5) Save products");
 		System.out.println("0) Exit");
 		System.out.println();
 		System.out.print("Option: ");
@@ -157,12 +158,13 @@ public class Main {
 	public static void save() {
 		BufferedWriter writer = null;
 		try {
-			writer = new BufferedWriter(new FileWriter("src\\exercise\\Products.txt"));
+			writer = new BufferedWriter(new FileWriter("src\\exercise\\Products.txt", true));
 			for(Product instance: list) {
+				writer.flush();
 				if(instance instanceof Expirable) {
-					writer.append(((Expirable) instance).getName() + ";" + ((Expirable) instance).getPrice() + ";" + ((Expirable) instance).getExpireDays() + "\n");
-				} else if(instance instanceof Expirable) {
-					writer.append(((NotExpirable) instance).getName() + ";" + ((NotExpirable) instance).getPrice() + ";" + ((NotExpirable) instance).getType() + "\n");
+					writer.write(((Expirable) instance).getName() + ";" + ((Expirable) instance).getPrice() + ";" + ((Expirable) instance).getExpireDays() + "\n");
+				} else if(instance instanceof NotExpirable) {
+					writer.write(((NotExpirable) instance).getName() + ";" + ((NotExpirable) instance).getPrice() + ";" + ((NotExpirable) instance).getType() + "\n");
 				}
 			}
 		} catch (IOException err) {
