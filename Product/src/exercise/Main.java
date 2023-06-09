@@ -159,12 +159,16 @@ public class Main {
 		BufferedWriter writer = null;
 		try {
 			writer = new BufferedWriter(new FileWriter("src\\exercise\\Products.txt", true));
-			for(Product instance: list) {
-				writer.flush();
-				if(instance instanceof Expirable) {
-					writer.write(((Expirable) instance).getName() + ";" + ((Expirable) instance).getPrice() + ";" + ((Expirable) instance).getExpireDays() + "\n");
-				} else if(instance instanceof NotExpirable) {
-					writer.write(((NotExpirable) instance).getName() + ";" + ((NotExpirable) instance).getPrice() + ";" + ((NotExpirable) instance).getType() + "\n");
+			if(list.isEmpty()) {
+				System.out.println("No products have been saved because the list is empty!");
+			} else {
+				for(Product instance: list) {
+					writer.flush();
+					if(instance instanceof Expirable) {
+						writer.write(((Expirable) instance).getName() + ";" + ((Expirable) instance).getPrice() + ";" + ((Expirable) instance).getExpireDays() + "\n");
+					} else if(instance instanceof NotExpirable) {
+						writer.write(((NotExpirable) instance).getName() + ";" + ((NotExpirable) instance).getPrice() + ";" + ((NotExpirable) instance).getType() + "\n");
+					}
 				}
 			}
 		} catch (IOException err) {
