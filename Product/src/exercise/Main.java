@@ -155,16 +155,20 @@ public class Main {
 	}
 	
 	public static void save() {
-		Scanner reader = null;
 		BufferedWriter writer = null;
 		try {
-			reader = new Scanner(new FileReader("src\\exercise\\Products.txt"));
 			writer = new BufferedWriter(new FileWriter("src\\exercise\\Products.txt"));
+			for(Product instance: list) {
+				if(instance instanceof Expirable) {
+					writer.append(((Expirable) instance).getName() + ";" + ((Expirable) instance).getPrice() + ";" + ((Expirable) instance).getExpireDays() + "\n");
+				} else if(instance instanceof Expirable) {
+					writer.append(((NotExpirable) instance).getName() + ";" + ((NotExpirable) instance).getPrice() + ";" + ((NotExpirable) instance).getType() + "\n");
+				}
+			}
 		} catch (IOException err) {
-			System.out.println("Failed to generate reader and writer!");
+			System.out.println("Failed to generate writer!");
 			err.getMessage();
 		} finally {
-			reader.close();
 			try {
 				writer.close();
 			} catch (IOException err) {
