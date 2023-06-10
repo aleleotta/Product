@@ -170,6 +170,7 @@ public class Main {
 						writer.write(((NotExpirable) instance).getName() + ";" + ((NotExpirable) instance).getPrice() + ";" + ((NotExpirable) instance).getType() + "\n");
 					}
 				}
+				System.out.println("The following products have been added successfully to the list.");
 			}
 		} catch (IOException err) {
 			System.out.println("Failed to generate writer!");
