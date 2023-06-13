@@ -21,10 +21,17 @@ public class Expirable extends Product {
 			this.expireDays = expireDays;
 		}
 	}
-	
+	/**
+	 * Returns the days left for a product to expire.
+	 * @return Returns the expire days of a product.
+	 */
 	public int getExpireDays() {
 		return expireDays;
 	}
+	/**
+	 * Sets new expire days for a product.
+	 * @param expireDays Parameter that will set the new value for expire days on one product.
+	 */
 	public void setExpireDays(int expireDays) {
 		if(expireDays > 0) {
 			this.expireDays = expireDays;

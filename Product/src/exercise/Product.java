@@ -40,21 +40,33 @@ public class Product implements Comparable<Product> {
 			this.price = price;
 		}
 	}
-
+	/**
+	 * Returns the name of a product.
+	 * @return Returns name.
+	 */
 	public String getName() {
 		return name;
 	}
-
+	/**
+	 * Sets a new name for a product.
+	 * @param name Name that will be received as parameter by setName setter.
+	 */
 	public void setName(String name) {
 		if(name != null && !name.equals("")) {
 			this.name = name;
 		}
 	}
-
+	/**
+	 * Returns the price of a product.
+	 * @return Returns price.
+	 */
 	public double getPrice() {
 		return price;
 	}
-
+	/**
+	 * Sets a new price for a product.
+	 * @param price Price that will be received as parameter by setPrice setter.
+	 */
 	public void setPrice(double price) {
 		if(price > 0) {
 			this.price = price;

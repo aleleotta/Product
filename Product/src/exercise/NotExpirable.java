@@ -22,11 +22,17 @@ public class NotExpirable extends Product {
 			this.type = type;
 		}
 	}
-	
+	/**
+	 * Returns the type of product.
+	 * @return Returns type.
+	 */
 	public String getType() {
 		return type;
 	}
-
+	/**
+	 * Sets a new type for one product.
+	 * @param type Parameter that sets new value for the type of product.
+	 */
 	public void setType(String type) {
 		if(!type.equals("")) {
 			this.type = type;
