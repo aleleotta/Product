@@ -170,14 +170,14 @@ public class Main {
 						writer.write(((NotExpirable) instance).getName() + ";" + ((NotExpirable) instance).getPrice() + ";" + ((NotExpirable) instance).getType() + "\n");
 					}
 				}
-				System.out.println("The following products have been added successfully to the list.");
+				System.out.println("The following products have been added successfully to the list."); //Final message after all data has been written.
 			}
 		} catch (IOException err) {
 			System.out.println("Failed to generate writer!");
 			System.out.println(err.getMessage());
-		} finally {
+		} finally { //Cleanup
 			try {
-				writer.close();
+				writer.close(); //Writer closes.
 			} catch (IOException err) {
 				System.out.println("Error while closing writer.");
 				System.out.println(err.getMessage());
