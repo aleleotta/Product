@@ -156,10 +156,10 @@ public class Main {
 	}
 	
 	public static void save() {
-		BufferedWriter writer = null;
+		BufferedWriter writer = null; //Declaring writer as null.
 		try {
-			writer = new BufferedWriter(new FileWriter("src\\exercise\\Products.txt", true));
-			if(list.isEmpty()) {
+			writer = new BufferedWriter(new FileWriter("src\\exercise\\Products.txt", true)); //Writer gets filepath with append which doesn't let the new data overwrite the already written data on the txt file.
+			if(list.isEmpty()) { //If the list is empty, a message pops up and no task will be performed.
 				System.out.println("No products have been saved because the list is empty!");
 			} else {
 				for(Product instance: list) {
@@ -174,13 +174,13 @@ public class Main {
 			}
 		} catch (IOException err) {
 			System.out.println("Failed to generate writer!");
-			err.getMessage();
+			System.out.println(err.getMessage());
 		} finally {
 			try {
 				writer.close();
 			} catch (IOException err) {
 				System.out.println("Error while closing writer.");
-				err.getMessage();
+				System.out.println(err.getMessage());
 			}
 		}
 	}
