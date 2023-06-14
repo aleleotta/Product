@@ -10,6 +10,7 @@ public class Main {
 	static TreeSet<Product> list = new TreeSet<Product>(); //Creation of list (TreeSet).
 	static Scanner sc = new Scanner(System.in); //Input scanner declared.
 	public static void main(String[] args) {
+		list = read();
 		int option = 10; //Functionality decision input.
 		while(option != 0) { //Creation of while loop containing CRUD.
 			menu(); //Menu printing at beginning of while loop.
@@ -59,6 +60,38 @@ public class Main {
 		System.out.println("0) Exit");
 		System.out.println();
 		System.out.print("Option: ");
+	}
+	
+	public static TreeSet<Product> read() {
+		BufferedReader reader = null;
+		Product obj = null;
+		try {
+			reader = new BufferedReader(new FileReader("src\\exercise\\Products.txt"));
+			String line;
+			try {
+				while(reader.readLine() != null) {
+					line = reader.readLine();
+					String[] values = line.split(";"); //Parameter is used to determine when to split line. This will separate every value needed.
+					String name = values[0];
+					double price = Double.parseDouble(values[1]);
+					try {
+						int expireDays = Integer.parseInt(values[2]);
+						obj = new Expirable(name, price, expireDays);
+						list.add(obj);
+					} catch (NumberFormatException err) {
+						String type = values[2];
+						obj = new NotExpirable(name, price, type);
+						list.add(obj);
+					}
+				}
+			} catch (IOException err) {
+				System.out.println("Something went wrong");
+				System.out.println(err.getMessage());
+			}
+		} catch (FileNotFoundException err) {
+			System.out.println("Failed to generate writer!");
+		}
+		return list;
 	}
 	
 	/**
@@ -158,7 +191,7 @@ public class Main {
 	public static void save() {
 		BufferedWriter writer = null; //Declaring writer as null.
 		try {
-			writer = new BufferedWriter(new FileWriter("src\\exercise\\Products.txt", true)); //Writer gets filepath with append which doesn't let the new data overwrite the already written data on the txt file.
+			writer = new BufferedWriter(new FileWriter("src\\exercise\\Products.txt"));
 			if(list.isEmpty()) { //If the list is empty, a message pops up and no task will be performed.
 				System.out.println("No products have been saved because the list is empty!");
 			} else {
