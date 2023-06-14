@@ -93,9 +93,12 @@ public class Main {
 			System.out.println("Something went wrong");
 			System.out.println(err.getMessage());
 		} finally {
-			/*if(reader != null) {
+			try {
 				reader.close();
-			}*/
+			} catch (IOException err) {
+				System.out.println("Something went wrong while closing the reader!");
+				System.out.println(err.getMessage());
+			}
 		}
 		return list;
 	}
