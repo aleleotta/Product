@@ -62,6 +62,10 @@ public class Main {
 		System.out.print("Option: ");
 	}
 	
+	/**
+	 * This method is responsible for keeping previously saved data on the previous execution of the program.
+	 * @return Returns updated list with all previously saved data.
+	 */
 	public static TreeSet<Product> read() {
 		BufferedReader reader = null;
 		Product obj = null;
