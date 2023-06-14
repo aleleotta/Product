@@ -162,11 +162,11 @@ public class Main {
 			if(list.isEmpty()) { //If the list is empty, a message pops up and no task will be performed.
 				System.out.println("No products have been saved because the list is empty!");
 			} else {
-				for(Product instance: list) {
-					writer.flush();
-					if(instance instanceof Expirable) {
+				for(Product instance: list) { //Starts writing details of each product into the txt file.
+					writer.flush(); //Commits data from writer to file before any other task is made.
+					if(instance instanceof Expirable) { //Checks if the following product is expirable.
 						writer.write(((Expirable) instance).getName() + ";" + ((Expirable) instance).getPrice() + ";" + ((Expirable) instance).getExpireDays() + "\n");
-					} else if(instance instanceof NotExpirable) {
+					} else if(instance instanceof NotExpirable) { //Checks if the following product is not expirable.
 						writer.write(((NotExpirable) instance).getName() + ";" + ((NotExpirable) instance).getPrice() + ";" + ((NotExpirable) instance).getType() + "\n");
 					}
 				}
