@@ -71,29 +71,31 @@ public class Main {
 		Product obj = null;
 		try {
 			reader = new BufferedReader(new FileReader("src\\exercise\\Products.txt"));
-			String line;
-			try {
-				while(reader.readLine() != null) {
-					line = reader.readLine();
+			String line = reader.readLine();
+				while(line != null) {
 					String[] values = line.split(";"); //Parameter is used to determine when to split line. This will separate every value needed.
 					String name = values[0];
 					double price = Double.parseDouble(values[1]);
 					try {
 						int expireDays = Integer.parseInt(values[2]);
 						obj = new Expirable(name, price, expireDays);
-						list.add(obj);
 					} catch (NumberFormatException err) {
 						String type = values[2];
 						obj = new NotExpirable(name, price, type);
+					} finally {
 						list.add(obj);
 					}
+					line = reader.readLine();
 				}
-			} catch (IOException err) {
-				System.out.println("Something went wrong");
-				System.out.println(err.getMessage());
-			}
 		} catch (FileNotFoundException err) {
 			System.out.println("Failed to generate writer!");
+		} catch (IOException err) {
+			System.out.println("Something went wrong");
+			System.out.println(err.getMessage());
+		} finally {
+			/*if(reader != null) {
+				reader.close();
+			}*/
 		}
 		return list;
 	}
