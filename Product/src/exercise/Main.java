@@ -163,7 +163,7 @@ public class Main {
 					System.out.print("New price: ");
 					double price = sc.nextDouble();
 					sc.nextLine();
-					obj.setPrice(price);
+					instance.setPrice(price);
 					if(instance instanceof Expirable) {
 						System.out.print("Days to expire: ");
 						int expireDays = sc.nextInt();
